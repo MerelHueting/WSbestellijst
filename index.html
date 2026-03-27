@@ -102,12 +102,24 @@ function generateList() {
 }
 
 loadRecipes();
-  function copyList() {
+function copyList() {
   let text = "";
+
+  // geselecteerde recepten ophalen
+  const selectedOptions = Array.from(document.getElementById("recipeList").selectedOptions);
+  
+  text += "Recepten:\n";
+  selectedOptions.forEach(option => {
+    text += "- " + option.text + "\n";
+  });
+
+  text += "\nBoodschappen:\n";
+
+  // tabel ophalen
   const rows = document.querySelectorAll("#output tr");
 
   rows.forEach((row, index) => {
-    if (index === 0) return; // sla header over
+    if (index === 0) return;
     const cols = row.querySelectorAll("td");
     text += `${cols[0].innerText} - ${cols[2].innerText} ${cols[3].innerText}\n`;
   });
